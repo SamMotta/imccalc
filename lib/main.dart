@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -74,35 +73,51 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'Digite sua massa:',
-            ),
+            const Text('Digite sua massa:', style: TextStyle(fontSize: 18)),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 64),
-              margin: const EdgeInsets.fromLTRB(0, 0, 0, 24),
+              margin: const EdgeInsets.fromLTRB(0, 0, 0, 18),
               child: TextField(
+                cursorColor: Colors.orange,
                 onChanged: (value) {
                   String massString = value.replaceAll(",", "");
                   _mass = double.tryParse(massString) ?? 0;
                 },
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), hintText: "56.4"),
+                    border: OutlineInputBorder(),
+                    hintText: "56.4",
+                    hintStyle: TextStyle(color: Colors.black26)),
                 keyboardType: TextInputType.number,
               ),
             ),
-            const Text(
-              'Digite sua altura:',
-            ),
+            const Text('Digite sua altura:', style: TextStyle(fontSize: 18)),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 64),
               child: TextField(
+                cursorColor: Colors.orange,
                 onChanged: (value) {
                   String heightString = value.replaceAll(",", "");
                   _height = double.tryParse(heightString) ?? 0;
                 },
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), hintText: "1.72"),
+                    border: OutlineInputBorder(),
+                    hintText: "1.72",
+                    hintStyle: TextStyle(color: Colors.black26)),
                 keyboardType: TextInputType.number,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+              child: TextButton.icon(
+                onPressed: _calculateImc,
+                style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll<Color>(Colors.blue),
+                ),
+                label: const Text(
+                  "Calcular IMC",
+                  style: TextStyle(color: Colors.white),
+                ),
+                icon: const Icon(Icons.calculate, color: Colors.white),
               ),
             ),
             Container(
@@ -111,14 +126,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         Padding(
                             padding: const EdgeInsets.fromLTRB(0, 18, 0, 0),
-                            child: Text(
-                              _classification,
-                              textScaleFactor: 2,
-                            )),
-                        Text(
-                          _imc.toStringAsFixed(2),
-                          textScaleFactor: 3,
-                        ),
+                            child: Text(_classification,
+                                style: const TextStyle(fontSize: 26))),
+                        Text(_imc.toStringAsFixed(2),
+                            style: const TextStyle(fontSize: 24)),
                       ],
                     )
                   : null,
@@ -126,11 +137,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _calculateImc,
-        tooltip: 'Calculate',
-        child: const Icon(Icons.calculate),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _calculateImc,
+      //   tooltip: 'Calculate',
+      //   child: const Icon(Icons.calculate),
+      // ),
     );
   }
 }
